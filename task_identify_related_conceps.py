@@ -1,3 +1,4 @@
+
 """
 Terminal application to identify collaborators in a field of research.
 Identifying the leading experts and potential collaborators in a particular domain or domains
@@ -12,7 +13,7 @@ import operator
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-
+from getpass import getpass
 path1 = "arxiv_12_28_2022.json"
 path2 = "since_dec22.json"
 

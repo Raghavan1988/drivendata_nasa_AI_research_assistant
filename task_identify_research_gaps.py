@@ -12,6 +12,7 @@ import operator
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
+from getpass import getpass
 
 path1 = "arxiv_12_28_2022.json"
 path2 = "since_dec22.json"
@@ -100,7 +101,9 @@ def collect_results(hits,sents, path, prefix=""):
 
 ##### Start code
 model = SentenceTransformer('sentence-transformers/allenai-specter', device='cuda')
-
+OPENAI_API_KEY = getpass("Please enter your OPEN AI API KEY to continue:")
+## load the OPENAI LLM model
+open_ai_key = OPENAI_API_KEY
 
 sents_from_path1 = preprocess(path1)
 sents_from_path2 = preprocess(path2)
@@ -109,13 +112,15 @@ sents_from_path2 = preprocess(path2)
 an = generate_annoy("annoy_index.ann")
 an2 = generate_annoy("annoy_index_since_dec22.ann")
 
-## load the OPENAI LLM model
-open_ai_key = "OPEN AI KEY"
+
 llm = OpenAI(openai_api_key=open_ai_key, model_name= "gpt-3.5-turbo-16k")
 
-
 while True:
+    print ("===============================")
+
     query = input("Describe the field (or subfield) as a query:")
+    print ("===============================")
+
     print (query)
     response1 = collect_results(search(query,an,model,30),sents_from_path1, path1)
     response2 = collect_results(search(query,an2,model,10),sents_from_path2, path2)

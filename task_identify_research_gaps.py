@@ -100,7 +100,7 @@ def collect_results(hits,sents, path, prefix=""):
 
 
 ##### Start code
-model = SentenceTransformer('sentence-transformers/allenai-specter', device='cuda')
+model = SentenceTransformer('sentence-transformers/allenai-specter', device='cpu')
 OPENAI_API_KEY = getpass("Please enter your OPEN AI API KEY to continue:")
 ## load the OPENAI LLM model
 open_ai_key = OPENAI_API_KEY
